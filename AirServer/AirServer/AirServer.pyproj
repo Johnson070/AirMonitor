@@ -28,11 +28,15 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="bd_work.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="models.py" />
     <Compile Include="testClient.py" />
     <Compile Include="runserver.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AirServerDB.db" />
     <Content Include="index.html" />
     <Content Include="requirements.txt" />
   </ItemGroup>
