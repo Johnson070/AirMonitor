@@ -1,0 +1,26 @@
+connect = sqlite3.connect('.\AirServerDB.db')
+
+		cursor = connect.cursor()
+
+		#try:
+		cursor.executemany('INSERT INTO sensors VALUES(?, ?, ?, ?)', data)
+		#except:
+		#	cursor.execute('UPDATE INTO sensors VALUES(?, ?, ?, ?)', data)
+
+		for row in cursor.execute("SELECT rowid, * FROM sensors"):
+			print(row)
+
+		#cursor.execute('DELETE FROM sensors WHERE value = 55')
+		#cursor.execute('DELETE FROM sensors WHERE value = 23')
+		#cursor.execute('UPDATE sensors SET id = 2 WHERE id = 1')
+
+		connect.commit()
+
+		cursor.close()
+		connect.close()
+
+		
+        #test = "DELETE FROM sensors"
+         #.format(' WHERE id = ?' if not by_id is None else '',' AND type = ?'
+         #if not by_type is None else '',' AND value = ?' if not by_value is
+         #None else '',' AND time = ?' if not by_time is None else '')

@@ -7,7 +7,7 @@
     <ProjectGuid>0f22b155-b9dc-4fe9-a740-cca041c35093</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <ProjectTypeGuids>{789894c7-04a9-4a11-a6b5-3f4435165112};{1b580a1a-fdb3-4b32-83e1-6407eb2722e6};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
-    <StartupFile>runserver.py</StartupFile>
+    <StartupFile>AirServer\bd_work.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -18,6 +18,7 @@
     <Name>AirServer</Name>
     <RootNamespace>AirServer</RootNamespace>
     <InterpreterId>Global|VisualStudio|Python37</InterpreterId>
+    <TestFramework>Pytest</TestFramework>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -28,20 +29,28 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="bd_work.py">
+    <Compile Include="AirServer\rest_server.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="models.py" />
-    <Compile Include="testClient.py" />
+    <Compile Include="AirServer\__init__.py" />
+    <Compile Include="AirServer\bd_work.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AirServer\models.py" />
+    <Compile Include="AirServer\testClient.py" />
     <Compile Include="runserver.py" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AirServerDB.db" />
+    <Content Include="AirServer\AirServerDB.db" />
+    <Content Include="helper.txt" />
     <Content Include="index.html" />
     <Content Include="requirements.txt" />
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="Global|VisualStudio|Python37" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AirServer\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Web.targets" />
   <!-- Specify pre- and post-build commands in the BeforeBuild and 
