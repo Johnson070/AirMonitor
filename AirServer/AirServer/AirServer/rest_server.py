@@ -1,13 +1,15 @@
 from AirServer import app
-import AirServer.models as db
+import AirServer.models as data
+import AirServer.bd_work as database
 import jsonpickle, datetime
 from flask import Flask, request
 
 access_tokens = [None,None]
 
-model = db.model()
+model = data.model()
+db = database.db_work()
 
-model.atomizer = db.atomizer(False,1000,datetime.datetime.now(),True,100)
+model.atomizer = data.atomizer(False,1000,datetime.datetime.now(),True,100)
 
 @app.route('/sensors', methods=['GET'])
 def get_list():
@@ -23,7 +25,11 @@ def update_list():
 
     print(json)
     print(json['time'])
-    model.add_sensor(db.sensor(json['id'], json['type'], json['value'], str(datetime.datetime.now()).replace(' ', 'T')))
+    model.add_sensor(data.sensor(json['id'], json['type'], json['value'], str(datetime.datetime.now()).replace(' ', 'T')))
+
+    db.connect()
+    db.add_sensor(json['id'], json['value'], json['type'])
+    db.disconnect()
 
     return jsonpickle.encode(model, unpicklable=False)
 
@@ -32,22 +38,19 @@ def main():
     global model
 
     if request.method == 'POST':
-        print(request.form['id'])
-        print(request.form['type'])
-        print(request.form['value'])
-        print(request.form['time'])
+        #print(request.form['id'])
+        #print(request.form['type'])
+        #print(request.form['value'])
+        #print(request.form['time'])
 
-        #model.add_sensor(db.sensor(0, 'temp', 23, datetime.datetime.now()))
+        model.add_sensor(data.sensor(int(request.form['id']),request.form['type'], int(request.form['value']), request.form['time']))
 
-        #test = sensor(1, 'temp', 55, datetime.datetime.now())
-
-        #model.add_sensor(test)
-        #model.add_nozzle(db.nozzle(0, False, 1000, datetime.datetime.now(),
-        #False, 100))
-        #model.add_nozzle(db.nozzle(1, False, 1000, datetime.datetime.now(),
-        #False, 100))
-
-        model.add_sensor(db.sensor(int(request.form['id']),request.form['type'], int(request.form['value']), request.form['time']))
+        try:
+            db.connect()
+            db.add_sensor(int(request.form['id']), int(request.form['value']), request.form['type'], request.form['time'])
+            db.disconnect()
+        except:
+            pass
 
     html = ''
 
