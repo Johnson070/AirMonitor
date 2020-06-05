@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>{{ title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial;
+        }
+
+        /* Style the tab */
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+            /* Style the buttons inside the tab */
+            .tab button {
+                background-color: inherit;
+                float: left;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                padding: 14px 16px;
+                transition: 0.3s;
+                font-size: 17px;
+            }
+
+                /* Change background color of buttons on hover */
+                .tab button:hover {
+                    background-color: #ddd;
+                }
+
+                /* Create an active/current tablink class */
+                .tab button.active {
+                    background-color: #ccc;
+                }
+
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+
+        .json {
+            white-space: pre;
+        }
+    </style>
+</head>
+<body onload="load(event)">
+    <h2>Devices</h2>
+    <p>Click on the buttons inside the tabbed menu and submit data:</p>
+
+    <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'Sensor')">Sensor</button>
+        <button class="tablinks" onclick="openTab(event, 'Nozzle')">Nozzle</button>
+        <button class="tablinks" onclick="openTab(event, 'Atomizer')">Atomizer</button>
+    </div>
+
+    <div id="Sensor" class="tabcontent">
+        <h3>Sensor</h3>
+        <form id="form_sensor">
+            <p>id:<input name="id" required="required" type="number" /></p>
+            <p>type:<input id="type" name="type" required="required" type="text" /></p>
+            <p>value:<input id="value" name="value" required="required" type="number" /></p>
+            <p>time:<input name="time" type="datetime-local" required="required" /></p>
+            <input id="button" type="button" value="Submit" />
+        </form>
+    </div>
+
+    <div id="Nozzle" class="tabcontent">
+        <h3>Nozzle</h3>
+        <form id="form_nozzle">
+            <p>id:<input name="id" required="required" type="number" /></p>
+            <p>state_nozzle:<input id="state_nozzle" name="type" required="required" type="number" /></p>
+            <p>state_fan:<input id="state_fan" name="value" required="required" type="number" /></p>
+            <p>rpm_fan:<input id="rpm_fan" name="value" required="required" type="number" /></p>
+            <p>time:<input name="time" type="datetime-local" required="required" /></p>
+            <input id="button_nozzle" type="button" onclick="" value="Submit" />
+        </form>
+    </div>
+
+    <div id="Atomizer" class="tabcontent">
+        <h3>Atomizer</h3>
+        <p>Tokyo is the capital of Japan.</p>
+    </div>
+
+    <p>Class DATA:</p>
+    <div id="data_json" class="json"></div>
+
+    <img src="{{ url_for('static', filename='content/image.jpg') }}" alt="Flowers in Chania">
+
+    <script src="/static/scripts/jquery-1.10.2.js"></script>
+    <script src="/static/scripts/script.js" charset="utf-8"></script>
+</body>
+</html>

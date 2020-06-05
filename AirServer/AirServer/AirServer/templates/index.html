@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>{{ title }}</title>
+
+    <style>
+        .word {
+            white-space: pre;
+        }
+    </style>
+</head>
+<body>
+    <form action="/" method="post">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#tab1" role="tab" data-toggle="tab">Сепульки</a></li>
+            <li role="presentation"><a href="#tab2" role="tab" data-toggle="tab">Сепулькарии</a></li>
+            <li role="presentation"><a href="#tab3" role="tab" data-toggle="tab">Сепуление</a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="tab1">
+                <p>id:<input name="number" required="required" type="number" /></p>
+
+                <p>type:<input name="type" required="required" type="text" /></p>
+
+                <p>value:<input name="value" required="required" type="number" /></p>
+
+                <p>time:<input name="datetime-local" required="required" /></p>
+                <input name="btn" type="submit" value="Submit" />
+            </div>
+            <div role="tabpanel" class="tab-pane" id="tab2">
+                Устройства для сепуления.
+            </div>
+            <div role="tabpanel" class="tab-pane" id="tab3">
+                Занятие ардритов с планеты Энтеропия.
+            </div>
+        </div>
+
+        <br>
+
+        <p class="word">{{data}}</p>
+
+        <script src="/static/scripts/bootstrap.js"></script>
+    </form>
+</body>
+</html>

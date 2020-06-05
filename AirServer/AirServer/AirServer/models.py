@@ -19,9 +19,8 @@ class nozzle:
         self.values = values
 
 class nozzle_value:
-    def __init__(self, state_pump: bool, pressure: int, time: datetime, state_fan: bool, rpm_fan: int):
-        self.state_pump = state_pump
-        self.pressure = pressure
+    def __init__(self, state_nozzle: bool, time: datetime, state_fan: bool, rpm_fan: int):
+        self.state_nozzle = state_nozzle
         self.time = time
         self.state_fan = state_fan
         self.rpm_fan = rpm_fan

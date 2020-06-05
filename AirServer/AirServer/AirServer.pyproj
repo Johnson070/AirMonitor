@@ -7,7 +7,7 @@
     <ProjectGuid>0f22b155-b9dc-4fe9-a740-cca041c35093</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <ProjectTypeGuids>{789894c7-04a9-4a11-a6b5-3f4435165112};{1b580a1a-fdb3-4b32-83e1-6407eb2722e6};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
-    <StartupFile>AirServer\models.py</StartupFile>
+    <StartupFile>runserver.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -19,6 +19,8 @@
     <RootNamespace>AirServer</RootNamespace>
     <InterpreterId>Global|VisualStudio|Python37</InterpreterId>
     <TestFramework>Pytest</TestFramework>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
+    <WebBrowserPort>80</WebBrowserPort>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,8 +44,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AirServer\AirServerDB.db" />
+    <Content Include="AirServer\static\content\image.jpg" />
+    <Content Include="AirServer\static\favicon.ico" />
+    <Content Include="AirServer\static\scripts\bootstrap.js" />
+    <Content Include="AirServer\static\scripts\bootstrap.min.js" />
+    <None Include="AirServer\static\scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="AirServer\static\scripts\jquery-1.10.2.js" />
+    <Content Include="AirServer\static\scripts\script.js" />
+    <Content Include="AirServer\templates\index_new.html">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="helper.txt" />
-    <Content Include="index.html" />
+    <Content Include="AirServer\templates\index.html" />
     <Content Include="requirements.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -51,6 +63,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AirServer\" />
+    <Folder Include="AirServer\static\" />
+    <Folder Include="AirServer\static\content\" />
+    <Folder Include="AirServer\static\scripts\" />
+    <Folder Include="AirServer\templates\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Web.targets" />
   <!-- Specify pre- and post-build commands in the BeforeBuild and 

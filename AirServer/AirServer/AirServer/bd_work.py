@@ -103,16 +103,15 @@ class db_work:
 
 	def add_nozzle(self, 
 				id:int, 
-				state_pump:bool, 
 				pressure:int, 
 				state_fan:bool, 
 				rpm_fan:int, 
 				time:datetime):
 		if self.connect_to_db:
-			data = (id, state_pump, pressure, state_fan, rpm_fan, time)
+			data = (id, pressure, state_fan, rpm_fan, time)
 
 			try:
-				cursor.execute('INSERT INTO nozzles VALUES(?, ?, ?, ?, ?, ?)', data)
+				cursor.execute('INSERT INTO nozzles VALUES(?, ?, ?, ?, ?)', data)
 				connect.commit()
 			except Exception as ex:
 				print(ex)
@@ -193,9 +192,9 @@ if __name__ == '__main__':
 	db.add_sensor(0,'hum',55, datetime.datetime.now())
 	db.add_sensor(1,'hum',52)
 	db.remove_sensor(by_value = 52)
-	db.add_nozzle(0, False, 1001, False, 100, datetime.datetime.now())
-	db.add_nozzle(1, False, 1001, False, 100, datetime.datetime.now())
-	db.add_nozzle(3, False, 1001, False, 100, datetime.datetime.now())
+	db.add_nozzle(0, 1001, False, 100, datetime.datetime.now())
+	db.add_nozzle(1, 1001, False, 100, datetime.datetime.now())
+	db.add_nozzle(3, 1001, False, 100, datetime.datetime.now())
 	db.remove_nozzle(0)
 	db.disconnect()
 
