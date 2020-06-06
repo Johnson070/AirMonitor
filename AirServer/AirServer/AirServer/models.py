@@ -6,12 +6,12 @@ class atomizer:
         self.values = values
 
 class atomizer_value:
-    def __init__(self, state_pump: bool, pressure: int, time: datetime, state_fan: bool, rpm_fan: int):
+    def __init__(self, state_pump: bool, pressure: int, state_fan: bool, rpm_fan: int, time: datetime):
         self.state_pump = state_pump
         self.pressure = pressure
-        self.time = time
         self.state_fan = state_fan
         self.rpm_fan = rpm_fan
+        self.time = time
 
 class nozzle:
     def __init__(self, id: int, values:list=None):
@@ -38,9 +38,9 @@ class sensor_value:
         self.time = time
 
 class model:
-    def __init__(self, sensors: list=[], atomizer_device: atomizer=None, nozzles: list=[]):
+    def __init__(self, sensors: list=[], atomizer_device: list=[], nozzles: list=[]):
         self.sensors : list = sensors
-        self.atomizer : atomizer = atomizer_device
+        self.atomizer : list = atomizer_device
         self.nozzles : list = nozzles
 
     def class_to_dict(self, value, list_type:bool=True):
@@ -54,8 +54,8 @@ class model:
 
         return value_return
 
-    def add_atomizer(self, atomizer:atomizer_value):
-        self.atomizer.values.append(atomizer)
+    def add_atomizer(self, atomizer:atomizer):
+        self.atomizer.append(atomizer)
 
     def add_sensor(self, sensor):
         if not sensor is str:
@@ -97,14 +97,13 @@ class model:
                 math_id = True
 
         if math_id:
-            for i in range(len(self.sensors)):
-                if (nozzle['id'] == self.sensors[i]['id'] and not nozzle['values'] is None):
+            for i in range(len(self.nozzles)):
+                if (nozzle['id'] == self.nozzles[i]['id'] and not nozzle['values'] is None):
                     for j in range(len(nozzle['values'])):
                         self.nozzles[i]['values'].append(
                             model.class_to_dict(self, 
                                                 nozzle_value(
-                                                    nozzle['values'][j]['state_pump'], 
-                                                    nozzle['values'][j]['pressure'], 
+                                                    nozzle['values'][j]['state_nozzle'], 
                                                     nozzle['values'][j]['time'], 
                                                     nozzle['values'][j]['state_fan'], 
                                                     nozzle['values'][j]['rpm_fan']),

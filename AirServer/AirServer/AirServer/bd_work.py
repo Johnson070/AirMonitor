@@ -101,25 +101,6 @@ class db_work:
 			print('Need connect to the db')
 			raise Exception('Need connect to the db')
 
-	def add_nozzle(self, 
-				id:int, 
-				pressure:int, 
-				state_fan:bool, 
-				rpm_fan:int, 
-				time:datetime):
-		if self.connect_to_db:
-			data = (id, pressure, state_fan, rpm_fan, time)
-
-			try:
-				cursor.execute('INSERT INTO nozzles VALUES(?, ?, ?, ?, ?)', data)
-				connect.commit()
-			except Exception as ex:
-				print(ex)
-				raise Exception(ex)
-		else:
-			print('Need connect to the db')
-			raise Exception('Need connect to the db')
-
 	def add_sensor(self, 
 				id:int, 
 				type:str, 
@@ -181,6 +162,20 @@ class db_work:
 			else:
 				print('Need at least one argument')
 				raise Exception('Need at least one argument')
+		else:
+			print('Need connect to the db')
+			raise Exception('Need connect to the db')
+
+	def add_nozzle(self,state_pump:bool,pressure:int,state_fan:bool,rpm_fan:int, time:datetime=datetime.datetime.now()):
+		if self.connect_to_db:
+			data = (state_pump, pressure, state_fan, rpm_fan, time)
+
+			try:
+				cursor.execute('INSERT INTO atomizer VALUES(?, ?, ?, ?, ?)', data)
+				connect.commit()
+			except Exception as ex:
+				print(ex)
+				raise Exception(ex)
 		else:
 			print('Need connect to the db')
 			raise Exception('Need connect to the db')

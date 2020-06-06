@@ -19,12 +19,12 @@ def favicon():
     #                           'icon.ico', mimetype='image/vnd.microsoft.icon')
     return app.send_static_file('favicon.ico')
 
-@app.route('/sensors', methods=['GET'])
+@app.route('/sensor', methods=['GET'])
 def get_sensors():
     return jsonpickle.encode(model, unpicklable=False)
 
 
-@app.route('/sensors', methods=['POST'],)
+@app.route('/sensor', methods=['POST'],)
 def add_sensor():
     global model
     json = None
@@ -48,7 +48,7 @@ def add_sensor():
 
     return jsonpickle.encode(model, unpicklable=False)
 
-@app.route('/nozzles', methods=['POST'],)
+@app.route('/nozzle', methods=['POST'],)
 def add_nozzle():
     global model
     json = None
@@ -58,11 +58,16 @@ def add_nozzle():
     model.add_nozzle(
         data.nozzle(
             int(json['id']),
+            [
             data.nozzle_value( 
                 json['state_nozzle'], 
                 json['time'], 
                 json['state_fan'], 
-                int(json['rpm_fan']))))
+                int(json['rpm_fan']
+                    )
+                )
+            ]
+            ))
 
     db.connect()
     db.add_nozzle(int(json['id']),json['state_nozzle'],json['state_fan'],int(json['rpm_fan']),json['time'])
@@ -70,8 +75,38 @@ def add_nozzle():
 
     return jsonpickle.encode(model, unpicklable=False)
 
-@app.route('/nozzles', methods=['GET'])
+@app.route('/nozzle', methods=['GET'])
 def get_nozzles():
+    return jsonpickle.encode(model, unpicklable=False)
+
+@app.route('/atomizer', methods=['GET'])
+def get_atomizers():
+    return jsonpickle.encode(model, unpicklable=False)
+
+@app.route('/atomizer', methods=['POST'],)
+def add_atomizer():
+    global model
+    json = None
+
+    json = request.json
+
+    model.add_atomizer(
+        data.atomizer(
+            [
+            data.atomizer_value( 
+                json['state_pump'], 
+                int(json['pressure']),
+                json['state_fan'], 
+                int(json['rpm_fan']),
+                json['time']
+                )
+            ]
+            ))
+
+    db.connect()
+    db.add_nozzle(json['state_pump'],int(json['pressure']),json['state_fan'],int(json['rpm_fan']),json['time'])
+    db.disconnect()
+
     return jsonpickle.encode(model, unpicklable=False)
 
 @app.route('/')

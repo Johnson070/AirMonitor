@@ -13,7 +13,7 @@ function openTab(evt, tabName) {
 };
 
 function load(evt) {
-    openTab(event, 'Sensor');
+    openTab(event, 'sensor');
     tablinks = document.getElementsByClassName("tablinks");
 
     tablinks[0].className += " active"
@@ -22,41 +22,52 @@ function load(evt) {
 };
 
 $(document).ready(function () {
-    $('#button').click(function () {
-        var data = $("#form_sensor").serializeArray();
+    $('input[name="button"]').click(function () {
+        var data = $('.tabcontent[style="display: block;"] form').serializeArray();
 
         var json_data = new Object();
 
         //console.log(typeof(data));
-        console.log(data);
+        //console.log(data);
+
+        var correctData = true;
 
         for (var i = 0; i < data.length; i++) {
-            console.log(data[i]["name"], data[i]["value"]);
+            //console.log(data[i]["name"], data[i]["value"]);
             //json_data.set(data[i]["name"], data[i]["value"])
             json_data[data[i]["name"]] = data[i]["value"];
+
+            if (data[i]["value"] == "") correctData = false;
         }
 
-        json_data = JSON.stringify(json_data)
+        if (correctData)
+        {
+            json_data = JSON.stringify(json_data)
 
-        $.ajax({
-            url: "/sensors",
-            type: "POST",
-            datatype: 'json',
-            contentType: "application/json",
-            data: json_data,
-            processData: false,
-            success: function (response) {
-                var json = JSON.parse(response)
-                var str = JSON.stringify(json, null, 2);
+            $.ajax({
+                url: "/"+document.getElementsByClassName('tablinks active')[0].textContent.toLowerCase(),
+                type: "POST",
+                datatype: 'json',
+                contentType: "application/json",
+                data: json_data,
+                processData: false,
+                success: function (response) {
+                    var json = JSON.parse(response)
+                    var str = JSON.stringify(json, null, 2);
                 $("#data_json").text(str);
-            }
-        })
+                }
+            })
+        }
+        else
+        {
+            alert("Проверьте заполнены ли все поля!");
+        }
     });
 });
 
 function getValue() {
     $.ajax({
-        url: "/sensors",
+        url: "/sensor",
         type: "get",
         success: function (response) {
             var json = JSON.parse(response)
@@ -64,7 +75,7 @@ function getValue() {
             $("#data_json").text(str);
         },
         error: function (xhr) {
-            alert(xhr)
+            alert(xhr.toString())
         }
     });
 };

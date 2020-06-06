@@ -56,37 +56,44 @@
     <p>Click on the buttons inside the tabbed menu and submit data:</p>
 
     <div class="tab">
-        <button class="tablinks" onclick="openTab(event, 'Sensor')">Sensor</button>
-        <button class="tablinks" onclick="openTab(event, 'Nozzle')">Nozzle</button>
-        <button class="tablinks" onclick="openTab(event, 'Atomizer')">Atomizer</button>
+        <button class="tablinks" onclick="openTab(event, 'sensor')">Sensor</button>
+        <button class="tablinks" onclick="openTab(event, 'nozzle')">Nozzle</button>
+        <button class="tablinks" onclick="openTab(event, 'atomizer')">Atomizer</button>
     </div>
 
-    <div id="Sensor" class="tabcontent">
+    <div id="sensor" class="tabcontent">
         <h3>Sensor</h3>
         <form id="form_sensor">
             <p>id:<input name="id" required="required" type="number" /></p>
-            <p>type:<input id="type" name="type" required="required" type="text" /></p>
-            <p>value:<input id="value" name="value" required="required" type="number" /></p>
+            <p>type:<input name="type" required="required" type="text" /></p>
+            <p>value:<input name="value" required="required" type="number" /></p>
             <p>time:<input name="time" type="datetime-local" required="required" /></p>
-            <input id="button" type="button" value="Submit" />
+            <input name="button" type="button" value="Submit" />
         </form>
     </div>
 
-    <div id="Nozzle" class="tabcontent">
+    <div id="nozzle" class="tabcontent">
         <h3>Nozzle</h3>
         <form id="form_nozzle">
             <p>id:<input name="id" required="required" type="number" /></p>
-            <p>state_nozzle:<input id="state_nozzle" name="type" required="required" type="number" /></p>
-            <p>state_fan:<input id="state_fan" name="value" required="required" type="number" /></p>
-            <p>rpm_fan:<input id="rpm_fan" name="value" required="required" type="number" /></p>
+            <p>state_nozzle:<input name="state_nozzle" required="required" type="number" /></p>
+            <p>state_fan:<input name="state_fan" required="required" type="number" /></p>
+            <p>rpm_fan:<input name="rpm_fan" required="required" type="number" /></p>
             <p>time:<input name="time" type="datetime-local" required="required" /></p>
-            <input id="button_nozzle" type="button" onclick="" value="Submit" />
+            <input name="button" type="button" value="Submit" />
         </form>
     </div>
 
-    <div id="Atomizer" class="tabcontent">
+    <div id="atomizer" class="tabcontent">
         <h3>Atomizer</h3>
-        <p>Tokyo is the capital of Japan.</p>
+        <form id="form_atomizer">
+            <p>state_pump:<input name="state_pump" required="required" type="number" /></p>
+            <p>pressure:<input name="pressure" required="required" type="number" /></p>
+            <p>state_fan:<input name="state_fan" required="required" type="number" /></p>
+            <p>rpm_fan:<input name="rpm_fan" required="required" type="number" /></p>
+            <p>time:<input name="time" type="datetime-local" required="required" /></p>
+            <input name="button" type="button" value="Submit" />
+        </form>
     </div>
 
     <p>Class DATA:</p>
