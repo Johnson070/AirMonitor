@@ -1,0 +1,57 @@
+import smbus
+import time
+
+bus = smbus.SMBus(1)
+count = int(input('Введите кол-во датчиков: '))
+count_limit = 15
+count_while = 0
+
+for i in range(0x03, 0x77):
+	try:
+		bus.write_i2c_block_data(i, 0xff, [])
+	except:
+		pass
+
+
+try:
+	count_match = False
+
+	while not count_match
+:
+		count_i2c = 0
+		for i in range(0x03, 0x78):
+			ex = 1
+			try:
+				bus.read_byte(i)
+			except OSError as e:
+				ex = e.args[0]
+			finally:
+				if ex == 1:
+					#print(i)
+					count_i2c += 1
+		#print(count_i2c)
+
+		if count_i2c == count:
+			count_match = True
+		else:
+			for i in range(0x03, 0x78):
+				try:
+					bus.write_i2c_block_data(i,0xff,[])
+				except:
+					pass
+			try:
+				bus.write_i2c_block_data(0x08,0xff,[])
+			except:
+				pass
+
+			time.sleep(0.1)
+	
+	addr = 0x03
+	for i in range(0x03, 0x77):
+		try:
+			bus.write_i2c_block_data(i, 0xfd, [addr])
+			addr += 0x01
+		except:
+			pass
+finally:
+	bus.close()

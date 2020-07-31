@@ -1,0 +1,12 @@
+import smbus,time
+
+addr = 0x08
+bus = smbus.SMBus(1)
+
+while True:
+	data = bus.read_i2c_block_data(addr, 0x0C, 6)
+	
+	for char in data:
+		print(chr(char
+))
+	time.sleep(1)
